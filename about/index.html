@@ -123,11 +123,9 @@
         markdown = markdown.replace(
           /## App Screenshots\n([\s\S]*?)(?=\n##|$)/,
           (match, content) => {
-            const imgs = content.match(/!\[.*?\]\((.*?)\)/g) || [];
-            const imgHtml = imgs.map(img => {
-              const url = img.match(/\((.*?)\)/)[1];
-              return `<img src="${url}" />`;
-            }).join('');
+            // Match all <img src="URL" ...> tags
+            const imgs = [...content.matchAll(/<img[^>]+src="([^">]+)"/g)];
+            const imgHtml = imgs.map(m => `<img src="${m[1]}" />`).join('');
             return `<h2>App Screenshots</h2><div class="carousel">${imgHtml}</div>`;
           }
         );
