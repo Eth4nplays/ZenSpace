@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ZenSpace README</title>
+  <title>ZenSpace</title>
 
   <!-- Poppins Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -10,7 +10,6 @@
   <!-- Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- Carousel CSS (simple) -->
   <style>
     body {
       background-color: #ffe6da;
@@ -33,21 +32,21 @@
     }
 
     a {
-      color: #9b3e00; /* darker orange/brown for visibility */
+      color: #9b3e00;
       font-weight: 600;
       text-decoration: underline;
     }
-    
+
     a:hover {
-      color: #7a2b00; /* slightly darker on hover */
+      color: #7a2b00;
       text-decoration: underline;
     }
 
     img {
       margin: 20px auto;
-      display: block;
-      max-width: 100%;
       border-radius: 12px;
+      max-height: 200px; /* keep aspect ratio */
+      object-fit: contain;
     }
 
     pre {
@@ -64,7 +63,6 @@
       border-radius: 6px;
     }
 
-    /* WARNING block styling */
     .warning-box {
       background: #cb6100;
       color: #ffe6da;
@@ -76,63 +74,113 @@
       text-align: left;
     }
 
-    /* Carousel */
-    .carousel {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 20px 0;
-      scroll-behavior: smooth;
+    /* Carousel styling */
+    .carousel-container {
+      position: relative;
+      margin: 30px 0;
+      overflow: hidden;
+      max-width: 100%;
     }
 
-    .carousel img {
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+      gap: 10px;
+    }
+
+    .carousel-track img {
       flex: 0 0 auto;
-      width: 200px;
+      max-width: 200px;
       height: auto;
       border-radius: 12px;
     }
 
-    .carousel::-webkit-scrollbar {
-      height: 10px;
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #cb6100;
+      color: #ffe6da;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 700;
+      border-radius: 8px;
+      opacity: 0.8;
     }
 
-    .carousel::-webkit-scrollbar-thumb {
-      background: #cb6100;
-      border-radius: 5px;
+    .carousel-button:hover {
+      opacity: 1;
+    }
+
+    .carousel-button.prev {
+      left: 0;
+    }
+
+    .carousel-button.next {
+      right: 0;
     }
   </style>
 </head>
 <body>
 
-  <div id="content">Loading...</div>
+<div id="content">Loading...</div>
 
-  <script>
-    fetch("https://raw.githubusercontent.com/Eth4nplays/ZenSpace/main/README.md")
-      .then(response => response.text())
-      .then(markdown => {
+<script>
+fetch("https://raw.githubusercontent.com/Eth4nplays/ZenSpace/main/README.md")
+  .then(response => response.text())
+  .then(markdown => {
+    // Remove top-level # header
+    const lines = markdown.split("\n");
+    if (lines[0].startsWith("# ")) lines.shift();
+    markdown = lines.join("\n");
 
-        // Convert GitHub WARNING syntax to styled box while preserving links
-        markdown = markdown.replace(
-          /> \[!WARNING\]\n([\s\S]*?)(?=\n\n|$)/g,
-          (match, content) => {
-            return `<div class="warning-box">${marked.parse(content)}</div>`;
-          }
-        );
+    // Warning box
+    markdown = markdown.replace(
+      /> \[!WARNING\]\n([\s\S]*?)(?=\n\n|$)/g,
+      (match, content) => `<div class="warning-box">${marked.parse(content)}</div>`
+    );
 
-        // Convert the screenshots section to a carousel
-        markdown = markdown.replace(
-          /## App Screenshots\n([\s\S]*?)(?=\n##|$)/,
-          (match, content) => {
-            // Match all <img src="URL" ...> tags
-            const imgs = [...content.matchAll(/<img[^>]+src="([^">]+)"/g)];
-            const imgHtml = imgs.map(m => `<img src="${m[1]}" />`).join('');
-            return `<h2>App Screenshots</h2><div class="carousel">${imgHtml}</div>`;
-          }
-        );
+    // Carousel
+    markdown = markdown.replace(
+      /## App Screenshots\n([\s\S]*?)(?=\n##|$)/,
+      (match, content) => {
+        const imgs = [...content.matchAll(/<img[^>]+src="([^">]+)"/g)];
+        const imgHtml = imgs.map(m => `<img src="${m[1]}" />`).join('');
+        return `
+          <h2>App Screenshots</h2>
+          <div class="carousel-container">
+            <button class="carousel-button prev">&#10094;</button>
+            <div class="carousel-track">${imgHtml}</div>
+            <button class="carousel-button next">&#10095;</button>
+          </div>
+        `;
+      }
+    );
 
-        document.getElementById("content").innerHTML = marked.parse(markdown);
+    document.getElementById("content").innerHTML = marked.parse(markdown);
+
+    // JS for carousel buttons
+    const containers = document.querySelectorAll('.carousel-container');
+    containers.forEach(container => {
+      const track = container.querySelector('.carousel-track');
+      const prev = container.querySelector('.carousel-button.prev');
+      const next = container.querySelector('.carousel-button.next');
+      const imgWidth = track.querySelector('img')?.clientWidth || 200;
+      let index = 0;
+
+      prev.addEventListener('click', () => {
+        index = Math.max(index - 1, 0);
+        track.style.transform = `translateX(${-index * (imgWidth + 10)}px)`;
       });
-  </script>
+
+      next.addEventListener('click', () => {
+        index = Math.min(index + 1, track.children.length - 1);
+        track.style.transform = `translateX(${-index * (imgWidth + 10)}px)`;
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
