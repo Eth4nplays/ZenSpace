@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ZenSpace</title>
+  <title>ZenSpace README</title>
 
   <!-- Poppins Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -10,6 +10,7 @@
   <!-- Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+  <!-- Carousel CSS (simple) -->
   <style>
     body {
       background-color: #ffe6da;
@@ -32,18 +33,21 @@
     }
 
     a {
-      color: #cb6100;
+      color: #9b3e00; /* darker orange/brown for visibility */
       font-weight: 600;
-      text-decoration: none;
+      text-decoration: underline;
     }
-
+    
     a:hover {
+      color: #7a2b00; /* slightly darker on hover */
       text-decoration: underline;
     }
 
     img {
       margin: 20px auto;
       display: block;
+      max-width: 100%;
+      border-radius: 12px;
     }
 
     pre {
@@ -69,6 +73,32 @@
       margin: 40px auto;
       font-weight: 600;
       max-width: 600px;
+      text-align: left;
+    }
+
+    /* Carousel */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+    }
+
+    .carousel img {
+      flex: 0 0 auto;
+      width: 200px;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .carousel::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .carousel::-webkit-scrollbar-thumb {
+      background: #cb6100;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -81,10 +111,25 @@
       .then(response => response.text())
       .then(markdown => {
 
-        // Convert GitHub WARNING syntax to styled box
+        // Convert GitHub WARNING syntax to styled box while preserving links
         markdown = markdown.replace(
-          /> \[!WARNING\]\n> \*\*(.*?)\*\*([\s\S]*?)(?=\n\n|$)/g,
-          '<div class="warning-box"><strong>$1</strong>$2</div>'
+          /> \[!WARNING\]\n([\s\S]*?)(?=\n\n|$)/g,
+          (match, content) => {
+            return `<div class="warning-box">${marked.parse(content)}</div>`;
+          }
+        );
+
+        // Convert the screenshots section to a carousel
+        markdown = markdown.replace(
+          /## App Screenshots\n([\s\S]*?)(?=\n##|$)/,
+          (match, content) => {
+            const imgs = content.match(/!\[.*?\]\((.*?)\)/g) || [];
+            const imgHtml = imgs.map(img => {
+              const url = img.match(/\((.*?)\)/)[1];
+              return `<img src="${url}" />`;
+            }).join('');
+            return `<h2>App Screenshots</h2><div class="carousel">${imgHtml}</div>`;
+          }
         );
 
         document.getElementById("content").innerHTML = marked.parse(markdown);
