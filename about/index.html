@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ZenSpace</title>
+
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      background-color: #ffe6da;
+      color: #cb6100;
+      font-family: 'Poppins', sans-serif;
+      max-width: 900px;
+      margin: 60px auto;
+      text-align: center;
+      line-height: 1.8;
+      padding: 0 20px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-top: 40px;
+    }
+
+    p {
+      font-weight: 400;
+    }
+
+    a {
+      color: #cb6100;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      margin: 20px auto;
+      display: block;
+    }
+
+    pre {
+      background: rgba(203, 97, 0, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      overflow-x: auto;
+    }
+
+    code {
+      background: rgba(203, 97, 0, 0.1);
+      padding: 3px 6px;
+      border-radius: 6px;
+    }
+
+    /* WARNING block styling */
+    .warning-box {
+      background: #cb6100;
+      color: #ffe6da;
+      padding: 20px;
+      border-radius: 14px;
+      margin: 40px auto;
+      font-weight: 600;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="content">Loading...</div>
+
+  <script>
+    fetch("https://raw.githubusercontent.com/Eth4nplays/ZenSpace/main/README.md")
+      .then(response => response.text())
+      .then(markdown => {
+
+        // Convert GitHub WARNING syntax to styled box
+        markdown = markdown.replace(
+          /> \[!WARNING\]\n> \*\*(.*?)\*\*([\s\S]*?)(?=\n\n|$)/g,
+          '<div class="warning-box"><strong>$1</strong>$2</div>'
+        );
+
+        document.getElementById("content").innerHTML = marked.parse(markdown);
+      });
+  </script>
+
+</body>
+</html>
