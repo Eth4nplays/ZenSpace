@@ -6,6 +6,9 @@
 > **ZenSpace is experimental.** Use at your own risk.  
 > By using this app, you agree to our [Privacy Policy](https://eth4nplays.wixstudio.com/taskmaster/zenspace-privacy) and [Terms of Service](https://eth4nplays.wixstudio.com/taskmaster/zenspace-terms).
 
+## Installation
+[![Download APK](https://img.shields.io/badge/Download-Android_APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/Eth4nplays/ZenSpace/releases/latest/download/ZenSpace.apk)
+[![Open Web App](https://img.shields.io/badge/Launch-Web_App-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://eth4nplays.github.io/ZenSpace/)
 ## Features
 - Breathing exercises and sleep tracking tools
 - Emotion detection with voice and face analysis
