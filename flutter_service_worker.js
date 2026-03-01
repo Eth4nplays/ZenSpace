@@ -3,9 +3,9 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "1c0f9ca24f054cb201bf1a62b392cc4e",
-"assets/AssetManifest.bin.json": "d74073f956070bcbd19a1123b14c3ed3",
-"assets/AssetManifest.json": "3aef193a3882951013335e1b763811db",
+const RESOURCES = {"assets/AssetManifest.bin": "56c34703bf23630cb55c5d755055c973",
+"assets/AssetManifest.bin.json": "c2f3373ebd52bea317c3897a0b28d218",
+"assets/AssetManifest.json": "3d53e6617fa3ca9d6099ceb3d0b2d740",
 "assets/assets/background/1.jpg": "f4e3d96c229c080e6e424306a289935f",
 "assets/assets/background/2.jpg": "4eeaa7b63633f8e5bd3cfbd1da4f4480",
 "assets/assets/background/3.jpg": "4f6549b7226889fba23a9f5db21d3918",
@@ -14,6 +14,13 @@ const RESOURCES = {"assets/AssetManifest.bin": "1c0f9ca24f054cb201bf1a62b392cc4e
 "assets/assets/music/Ambient_Forest_Rain.mp3": "69e7980817ee9f647e4ce2eec10fbfd1",
 "assets/assets/music/credits.json": "4a232153c5b51b55d8c92977e1c35891",
 "assets/assets/music/The_Old_Water_Mill_Meditation.mp3": "0aec24d711381b94516aeba2e76d278e",
+"assets/assets/tutorial/1.png": "2a385a0380db9f7f29c6a959f22db782",
+"assets/assets/tutorial/2.png": "4145cfdd95c75b69f0163143c2fa0ce4",
+"assets/assets/tutorial/3.png": "906d264f7cf4184e1783e837f9692cdf",
+"assets/assets/tutorial/4.png": "795f959788367922f69931786bf70ebe",
+"assets/assets/tutorial/5.png": "3a90643298d3fbf2e4840d4e1491a11a",
+"assets/assets/tutorial/6.png": "be122f31c0e804400d49b92108576210",
+"assets/assets/tutorial/7.png": "ea5c2f5a13b60311aae9381967d4b364",
 "assets/assets/zenchan/angry.png": "ead03d517709079318c7dd3e907152d6",
 "assets/assets/zenchan/happy.png": "9053fead126be4b53edf9ffe00a50f21",
 "assets/assets/zenchan/laugh.png": "817a5d4449c4360498cb71acc45a7da6",
@@ -43,16 +50,16 @@ const RESOURCES = {"assets/AssetManifest.bin": "1c0f9ca24f054cb201bf1a62b392cc4e
 "canvaskit/skwasm_heavy.wasm": "8034ad26ba2485dab2fd49bdd786837b",
 "favicon.png": "2f778c1b2a7258b779c95955d5e1d271",
 "flutter.js": "888483df48293866f9f41d3d9274a779",
-"flutter_bootstrap.js": "3a6d0b2f57d30dd6d0c10d99dc4ad72e",
+"flutter_bootstrap.js": "4cc4e0ce04bfb9c640e1841983ab7247",
 "icons/Icon-192.png": "0ced95473ca0c27a988884c3214c6455",
 "icons/Icon-512.png": "81a3a105bceb9550a5a5c0e6e1728829",
 "icons/Icon-maskable-192.png": "4e9877f4136bbc99c50e55f5b1ac4e1b",
 "icons/Icon-maskable-512.png": "06f0541cca9d0e4a81c009be9cdde185",
 "index.html": "74066ae84a09dc793a51d5862125d792",
 "/": "74066ae84a09dc793a51d5862125d792",
-"main.dart.js": "a753880a92ba9ad43c2890abbee2ffca",
+"main.dart.js": "1529b58668519a18ff112917e5ec3465",
 "manifest.json": "118a49450d7f112467b757b997a44c2c",
-"version.json": "292714ba3a640fed38cd4a784aac20d0"};
+"version.json": "49880ca4d165c39c43c9ecc3b014e7ef"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
