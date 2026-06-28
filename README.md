@@ -2,7 +2,10 @@
 <img width="521" height="194.3" alt="zenspaceLong" src="https://github.com/user-attachments/assets/df707e29-5923-49c5-9cff-e6f6e8e53e07" />
 
 > [!WARNING]
-> **ZenSpace is experimental.** Use at your own risk.  
+> **ZenSpace is experimental.** Use at your own risk.
+> 
+> ZenSpace is a wellness application and is not a substitute for professional medical, mental health, or crisis services. If you are experiencing a mental health crisis, medical emergency, or have concerns about your wellbeing, please seek assistance from a qualified healthcare professional or your local emergency services.
+> 
 > By using this app, you agree to our [Privacy Policy](https://eth4nplays.wixstudio.com/taskmaster/zenspace-privacy) and [Terms of Service](https://eth4nplays.wixstudio.com/taskmaster/zenspace-terms).
 
 ## Installation
